@@ -1,10 +1,10 @@
 {:builds
  {:app {:asset-path "/js"
-        :modules {:main {:init-fn app.core/main}}
+        :modules {:main {:init-fn image_slider.core/main}}
         :output-dir "public/js"
         :target :browser}
   :cards {:asset-path "/js"
-          :modules {:main {:init-fn app.cards/main}}
+          :modules {:main {:init-fn image_slider.cards/main}}
           :compiler-options {:devcards true}
           :output-dir "public/js"
           :target :browser}
@@ -16,6 +16,6 @@
         :target :node-test}}
  :dependencies [[reagent "0.8.1"]
                 [devcards "0.2.6"]]
- :dev-http {3000 "public"}
+ :dev-http {9000 "public"}
  :nrepl {:port 3333}
  :source-paths ["src"]}

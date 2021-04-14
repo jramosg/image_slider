@@ -1,15 +1,15 @@
-(ns app.hello-cards
+(ns image-slider.hello-cards
   (:require [reagent.core :as r]
             [devcards.core :as dc :refer [defcard deftest]]
             [cljs.test :include-macros true :refer [is]]
             ["@testing-library/react" :refer [render cleanup fireEvent]]
-            [app.hello :refer [click-counter hello]]))
+            [image-slider.hello :refer [click-counter app]]))
 
 (defn testing-container
   "The container that should be used to render testing-library react components.
   We want to provide our own container so that the rendered devcards aren't used."
   []
-  (let [app-div (js/document.createElement "div")]
+  (let [app-div (js/document.createElement "body")]
     (.setAttribute app-div "id" "testing-lib")
     (js/document.body.appendChild app-div)))
 
@@ -20,7 +20,7 @@
    The two 'cards' below show the two components in this app.")
 
 (defcard hello-card
-  (dc/reagent hello))
+         (dc/reagent app))
 
 (defcard click-counter-card
   (dc/reagent click-counter)
@@ -36,7 +36,7 @@
    Tests will be ran outside the browser when you run the test command.")
 
 (deftest hello-tests-card
-  (let [tr (render (r/as-element [hello]) #js {:container (testing-container)})]
+  (let [tr (render (r/as-element [app]) #js {:container (testing-container)})]
     (is (.queryByText tr #"Hello") "Should say 'Hello'")
     (cleanup)))
 

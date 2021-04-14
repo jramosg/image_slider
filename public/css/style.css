@@ -1,0 +1,71 @@
+body {
+	background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+
+	min-height: 100vh;
+	font-family: 'Lato', sans-serif;
+	margin: 0;
+}
+
+.slider {
+    position: relative;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+}
+
+.slide {
+    background-position: center center;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    height: 100%;
+    width: 100%;
+}
+
+.slide.active {
+    transform: translateX(-100%);
+}
+
+.eraser {
+    background: #fff;
+    position: absolute;
+    transition: transform 0.7s ease-in-out;
+    top: 0;
+    left: 100%;
+    height: 100%;
+    width: 100%;
+    z-index: 100;
+}
+
+.eraser.active {
+    transform: translateX(-100%);
+}
+
+.buttons-container {
+    position: absolute;
+    bottom: 60px;
+    right: 20px;
+}
+
+.buttons-container button {
+    border: 2px solid #fff;
+    background-position: center center;
+    color: #fff;
+    cursor: pointer;
+    padding: 8px 20px;
+}
+
+button#previous {
+    background-image: url(/icons/carer_left.svg);
+}
+
+.buttons-container button:hover {
+    background-color: #fff;
+    color: #333;
+}
