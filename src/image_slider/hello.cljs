@@ -4,14 +4,18 @@
 (defn url [src]
       (str "url(" js/window.location.href src))
 
-(def images ["images/GPTempDownload.JPG"
-             "images/GPTempDownload2.jpg"])
+(def images ["images/GPTempDownload.jpg"
+             ;  "images/GPTempDownload2.jpg"
+             "images/GPTempDownload3.jpg"
+             "images/GPTempDownload4.jpg"
+             "images/GPTempDownload5.jpg"])
 
 (def interval-time 500)
 
 (def eraserActiveTime 700)
 
 (defonce image-index (r/atom 0))
+(defonce interval (r/atom nil))
 (def eraser-class (r/atom ""))
 
 (defn- setinterval []
@@ -24,23 +28,21 @@
                                                       (reset! image-index 0)))
                                           interval-time))
                        5000))
-(def auto-interval (setinterval))
 
 (defn- manage-timer [callback]
        (reset! eraser-class "active")
        (js/setTimeout (fn []
-                           (reset! eraser-class "")
-                           (callback))
+                          (reset! eraser-class "")
+                          (callback))
                       eraserActiveTime)
-       (js/clearTimeout auto-interval)
-       (setinterval))
+       (js/clearTimeout @interval)                          ;Stop interval
+       (reset! interval (setinterval))                      ;Start interval again
+       )
 
 (defn- to-next-image [image-index]
        (if-not (= @image-index (dec (count images)))
                (swap! image-index inc)
                (reset! image-index 0)))
-
-
 
 (defn- slider [image-index]
        (let [
@@ -66,6 +68,6 @@
 
 (defn app []
       (reset! image-index 0)                                ;initial state
+      (reset! interval (setinterval))                       ;initialize interval
       (fn []
           [slider image-index]))
-"background-image: url('https://images.unsplash.com/photo-1431444393712-19267bd26144?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1191&q=80');"
