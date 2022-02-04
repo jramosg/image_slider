@@ -49,8 +49,8 @@ body {
 
 .buttons-container {
     position: absolute;
-    bottom: 60px;
-    right: 20px;
+    bottom: 2em;
+    right: 2em;
 }
 
 .buttons-container button {
@@ -61,11 +61,50 @@ body {
     padding: 8px 20px;
 }
 
-button#previous {
-    background-image: url(/icons/carer_left.svg);
-}
-
 .buttons-container button:hover {
     background-color: #fff;
     color: #333;
+}
+
+iframe {
+    display: inline-block;
+    position: absolute;
+    top: 1em;
+    left: 1em;
+}
+
+iframe.strava {
+    height: 22em;
+    width: 30em;
+    allowtransparency: true;
+
+}
+
+.iframe-container {
+    opacity: .3;}
+
+.iframe-container:hover {
+    opacity: 1;
+}
+
+.strava-badge- {
+    display: inline-block;
+    height: 32px;
+    position: absolute;
+    top: 1em;
+    left: 1em;
+}
+
+.strava-badge- img {
+    visibility: hidden;
+    height: 32px;
+}
+
+.strava-badge-:hover { background-position: 0 -47px; }
+.strava-badge-follow {
+    cursor: pointer;
+    height: 32px;
+    width: 32px;
+    background: url(//badges.strava.com/echelon-sprite-32.png)
+    no-repeat 0 0;
 }

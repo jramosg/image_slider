@@ -7,7 +7,7 @@ In the project directory, you can run:
 ### `npm start`
 
 Runs the app in development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Open [http://localhost:9000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.
 
 The app uses [Reagent](https://reagent-project.github.io), a minimalistic interface between ClojureScript and React.<br>
@@ -69,3 +69,7 @@ Offline searchable docs https://devdocs.io/.
 
 VSCode plugin https://github.com/BetterThanTomorrow/calva.
 
+Install clj-kondo
+curl -sLO https://raw.githubusercontent.com/clj-kondo/clj-kondo/master/script/install-clj-kondo
+chmod +x install-clj-kondo
+./install-clj-kondo

@@ -1,12 +1,14 @@
 (ns image-slider.core
-  "This namespace contains your application and is the entrypoint for 'yarn start'."
+  "This namespace contains the application and is the entrypoint for 'yarn start'."
   (:require [reagent.core :as r]
-            [image-slider.hello :refer [app]]))
+            [image-slider.app :as app]))
 
 (defn ^:dev/after-load render
-      "Render the toplevel component for this app."
-      []
-      (r/render [app] (.getElementById js/document "app")))
+  "Render the toplevel component for this app."
+  []
+  (r/render
+    [app/core]
+    (.getElementById js/document "app")))
 
 (defn ^:export main
   "Run application startup logic."
