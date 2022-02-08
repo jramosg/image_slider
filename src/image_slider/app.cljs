@@ -24,7 +24,17 @@
 
 (defonce image-index (r/atom 0))
 (defonce interval (r/atom nil))
-(def eraser-class (r/atom ""))
+(defonce eraser-class (r/atom ""))
+
+(defn- to-next-image []
+  (if-not (= @image-index (dec (count images)))
+    (swap! image-index inc)
+    (reset! image-index 0)))
+
+(defn- to-previous-image []
+  (if-not (= @image-index (dec (count images)))
+    (swap! image-index inc)
+    (reset! image-index 0)))
 
 (defn- set-interval []
   (js/setInterval
@@ -33,9 +43,7 @@
       (js/setTimeout
         (fn []
           (reset! eraser-class "")
-          (if-not (= @image-index (dec (count images)))
-            (swap! image-index inc)
-            (reset! image-index 0)))
+          (to-next-image))
         interval-time))
     5000))
 
@@ -49,18 +57,12 @@
   (reset! interval (set-interval))                          ;Start interval again
   )
 
-(defn- to-next-image [image-index]
-  (if-not (= @image-index (dec (count images)))
-    (swap! image-index inc)
-    (reset! image-index 0)))
-
 (defn- slide-active []
   [:div.slide.active
    {:style {:background-image (url (get-in images [@image-index :src]))}}])
 
 (defn- strava-acvity-container []
   (let [{:keys [strava-link iframe-link]} (get images @image-index)]
-    (prn "iframe-link " iframe-link)
     [:div.iframe-container
      [:iframe.strava {:frameborder "0"
                       :src iframe-link}]
@@ -74,17 +76,13 @@
   [:button#previous
    {:style {:background-image (url "/icons/caret_left.svg")}
     :on-click (fn []
-                (manage-timer
-                  #(if-not (= @image-index 0)
-                     (swap! image-index dec)
-                     (reset! image-index (dec (count images))))))}])
+                (manage-timer #(to-previous-image)))}])
 
 (defn- next-btn []
   [:button#next
    {:style {:background-image (url "/icons/caret_right.svg")}
     :on-click (fn []
-                (manage-timer
-                  #(to-next-image image-index)))}])
+                (manage-timer #(to-next-image)))}])
 
 (defn- slider []
   [:div.slider
